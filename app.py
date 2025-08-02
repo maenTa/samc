@@ -3,11 +3,11 @@ import copy
 from flask import Flask, render_template, request, jsonify
 from threading import Lock, Thread
 from datetime import datetime
-from flask_httpauth import HTTPBasicAuth
+# from flask_httpauth import HTTPBasicAuth
 
 
 app = Flask(__name__)
-auth = HTTPBasicAuth()
+# auth = HTTPBasicAuth()
 
 # driver_names = {
 #     1: "Lewis Hamilton", 2: "Max Verstappen", 3: "Charles Leclerc", 4: "Sergio Perez",
@@ -184,16 +184,17 @@ flag_monitor_thread = Thread(target=monitor_flag_events)
 flag_monitor_thread.daemon = True
 flag_monitor_thread.start()
 
-@auth.get_password
-def get_pw(username):
-    return users.get(username)
+# @auth.get_password
+# def get_pw(username):
+#     return users.get(username)
 
 @app.route('/')
 def leaderboard():
     return render_template('leaderboard.html')
 
+
+# @auth.login_required
 @app.route('/control/<operator_id>')
-@auth.login_required
 def control_panel(operator_id):
     try:
         op_id = int(operator_id)
