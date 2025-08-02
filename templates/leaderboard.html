@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Race Leaderboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        <!-- Gambar Direktur -->
+        
+        
+        <div class="header-content">
+            <img id="director_image" src="" alt="Race Director" class="director-img">            
+            
+            <!-- Flag Banner -->
+            <div class="flag-banner">
+                <div class="flag-item" id="red_flag_banner">RED FLAG</div>
+                <div class="flag-item" id="yellow_flag_banner">YELLOW FLAG</div>
+                <div class="flag-item" id="safety_car_banner">SAFETY CAR</div>
+                <div class="flag-item" id="green_flag_banner">GREEN FLAG</div>
+                <div class="flag-item" id="safety_car_ending_banner">SAFETY CAR ENDING</div>
+            </div>
+            
+            <div class="race-info">
+                <div class="timer">00:00.000</div>
+                <div class="lap-counter">Lap <span id="current_lap">0</span>/<span id="total_laps">70</span></div>
+            </div>
+        </div>
+    </div>
+    
+    <table id="leaderboard">
+        <thead>
+            <tr>
+                <th>POS</th>
+                <th>NO</th>
+                <th>DRIVER</th>
+                <th>LAPS</th>
+                <th>LAST LAP</th>
+                <th>GAP</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Driver rows will be inserted here by JavaScript -->
+        </tbody>
+    </table>
+
+    <script>
+    function formatLapTime(seconds) {
+        if (!seconds || seconds <= 0) return '--:--.---';
+        
+        const mins = Math.floor(seconds / 60);
+        const secs = (seconds % 60).toFixed(3);
+        return `${mins}:${secs.padStart(6, '0')}`;
+    }
+    
+    function updateFlagBanner(flags, flagEvents) {
+        // Sembunyikan semua banner terlebih dahulu
+        $('.flag-item').removeClass('active blinking');
+        
+        // Tampilkan banner sesuai dengan flag yang aktif
+        if (flags.red_flag) {
+            $('#red_flag_banner').addClass('active blinking');
+        } 
+        else if (flags.safety_car) {
+            $('#safety_car_banner').addClass('active blinking');
+        } 
+        else if (flags.yellow_flag) {
+            $('#yellow_flag_banner').addClass('active blinking');
+        }
+        
+        // Tampilkan green flag jika ada event
+        if (flagEvents.green_flag_end_time > 0) {
+            const timeLeft = flagEvents.green_flag_end_time - (Date.now() / 1000);
+            console.log(timeLeft)
+            if (timeLeft > 0) {
+                $('#green_flag_banner').addClass('active blinking');
+                $('#green_flag_banner').text(`GREEN FLAG FOR ${Math.ceil(timeLeft)}S`);
+            }
+        }
+
+        // Cek jika safety car akan segera berakhir
+        if (flagEvents.safety_car_end_time > 0) {
+            const timeLeft = flagEvents.safety_car_end_time - (Date.now() / 1000);
+            if (timeLeft > 0) {
+                $('#safety_car_ending_banner').addClass('active blinking');
+                $('#safety_car_ending_banner').text(`SAFETY CAR ENDING IN ${Math.ceil(timeLeft)}S`);
+            }
+        }
+    }
+
+    function updateLeaderboard() {
+        $.getJSON('/race_data', function(data) {
+            // Update timer
+            if (data.start_time) {
+                if(!data.paused.is_paused) {
+                    console.log(data.paused.duration)
+                    const elapsed = data.elapsed_time - data.paused.duration;
+                    const mins = Math.floor(elapsed / 60);
+                    const secs = (elapsed % 60).toFixed(3);
+                    $('.timer').text(`${mins}:${secs.padStart(6, '0')}`);
+                }
+            } else {
+                $('.timer').text('00:00.000');
+            }
+            
+            // Update lap counter
+            $('#current_lap').text(data.current_lap);
+            $('#total_laps').text(data.total_laps);
+            
+            // Update flag banner
+            updateFlagBanner(data.flags, data.flag_events);
+            
+            // Update driver data
+            const drivers = data.drivers.sort((a, b) => a.position - b.position);
+            
+            $('tbody').empty();
+            drivers.forEach(driver => {
+                const lastLapTime = formatLapTime(driver.last_lap_duration);
+                $('tbody').append(`
+                    <tr>
+                        <td>${driver.position}</td>
+                        <td>#${driver.team}</td>
+                        <td>
+                            <img src="/static/drivers/${driver.logo}" alt="Driver ${driver.number}" class="driver-logo">
+                            <span class="driver-name">${driver.name}</span>
+                        </td>
+                        <td>${driver.laps}</td>
+                        <td>${lastLapTime}</td>
+                        <td>${driver.position == 1 ? 'Interval' : (driver.gap > 0 ? `+ ${driver.gap}` : '')}</td>
+                    </tr>
+                `);
+            });
+        });
+    }
+    
+    // Ambil URL gambar direktur dari server
+    function loadDirectorImage() {
+        $.getJSON('/director_image', function(data) {
+            $('#director_image').attr('src', data.image_url);
+        });
+    }
+    
+    $(document).ready(function() {
+        loadDirectorImage();
+        setInterval(updateLeaderboard, 1000);
+        updateLeaderboard();
+    });
+    </script>
+</body>
+</html>

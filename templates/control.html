@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Race Control Panel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Roboto Condensed', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            background: rgba(20, 20, 20, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(225, 6, 0, 0.3);
+            overflow: hidden;
+            border: 2px solid #e10600;
+        }
+        
+        .header {
+            background: linear-gradient(90deg, #000000, #b30500);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #ffcc00;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 42px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+            color: #fff;
+            text-shadow: 0 0 15px rgba(255, 204, 0, 0.7);
+        }
+        
+        .race-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin: 15px 0;
+        }
+        
+        .timer {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 32px;
+            font-weight: bold;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 25px;
+            border-radius: 10px;
+            border: 2px solid #444;
+            color: #ffcc00;
+            min-width: 200px;
+            text-align: center;
+        }
+        
+        .lap-counter {
+            font-size: 28px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 25px;
+            border-radius: 10px;
+            border: 2px solid #444;
+            font-weight: bold;
+        }
+        
+        .status {
+            font-size: 22px;
+            padding: 10px;
+            background: rgba(40, 40, 40, 0.8);
+            border-radius: 8px;
+            margin: 15px auto;
+            max-width: 90%;
+            text-align: center;
+        }
+        
+        .operator-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 15px 0;
+            font-size: 22px;
+            background: rgba(30, 30, 30, 0.8);
+            padding: 10px;
+            border-radius: 8px;
+        }
+        
+        /* Flag Banner */
+        .flag-banner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(10, 10, 10, 0.9);
+        }
+        
+        .flag-item {
+            padding: 15px 25px;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            min-width: 250px;
+            text-align: center;
+            opacity: 0.3;
+            transform: scale(0.95);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .flag-item.active {
+            opacity: 1;
+            transform: scale(1);
+            animation: pulse 1.5s infinite;
+        }
+        
+        .flag-item.blinking {
+            animation: blink 1s infinite;
+        }
+        
+        #red_flag_banner {
+            background: linear-gradient(45deg, #ff0000, #cc0000);
+            color: white;
+        }
+        
+        #yellow_flag_banner {
+            background: linear-gradient(45deg, #ffff00, #cccc00);
+            color: black;
+        }
+        
+        #safety_car_banner {
+            background: linear-gradient(45deg, #ffcc00, #cc9900);
+            color: black;
+        }
+        
+        #green_flag_banner {
+            background: linear-gradient(45deg, #00aa00, #008800);
+            color: white;
+        }
+        
+        #safety_car_ending_banner {
+            background: linear-gradient(45deg, #ff9900, #cc6600);
+            color: white;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .control-section {
+            padding: 25px;
+        }
+        
+        .start-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 25px 0;
+        }
+        
+        #startBtn {
+            width: 300px;
+            height: 80px;
+            font-size: 32px;
+            background: linear-gradient(45deg, #00aa00, #008800);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            margin: 15px auto;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            letter-spacing: 2px;
+            box-shadow: 0 6px 15px rgba(0, 200, 0, 0.4);
+            text-transform: uppercase;
+        }
+        
+        #startBtn:hover {
+            background: linear-gradient(45deg, #00cc00, #00aa00);
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 255, 0, 0.6);
+        }
+        
+        #startBtn:disabled {
+            background: linear-gradient(45deg, #555, #333);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        #restartBtn {
+            width: 300px;
+            height: 80px;
+            font-size: 32px;
+            background: linear-gradient(45deg, #aa0000, #880000);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            margin: 15px auto;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            letter-spacing: 2px;
+            box-shadow: 0 6px 15px rgba(200, 0, 0, 0.4);
+            text-transform: uppercase;
+        }
+        
+        #restartBtn:hover {
+            background: linear-gradient(45deg, #cc0000, #aa0000);
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 0, 0, 0.6);
+        }
+        
+        #restartBtn:disabled {
+            background: linear-gradient(45deg, #555, #333);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        /* Flag Controls */
+        .flag-controls {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .flag-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .flag-btn {
+            padding: 18px 30px;
+            font-size: 22px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-width: 220px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+        
+        .flag-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+        }
+        
+        .flag-status {
+            margin-top: 12px;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 8px 20px;
+            border-radius: 20px;
+            background: rgba(40, 40, 40, 0.8);
+        }
+        
+        .flag-btn[data-flag="safety_car"] {
+            background: linear-gradient(45deg, #ffcc00, #cc9900);
+            color: black;
+        }
+        
+        .flag-btn[data-flag="safety_car"]:hover {
+            background: linear-gradient(45deg, #ffd940, #ffb300);
+        }
+        
+        .flag-btn[data-flag="yellow_flag"] {
+            background: linear-gradient(45deg, #ffff00, #cccc00);
+            color: black;
+        }
+        
+        .flag-btn[data-flag="yellow_flag"]:hover {
+            background: linear-gradient(45deg, #ffff70, #ffff00);
+        }
+        
+        .flag-btn[data-flag="red_flag"] {
+            background: linear-gradient(45deg, #ff0000, #cc0000);
+            color: white;
+        }
+        
+        .flag-btn[data-flag="red_flag"]:hover {
+            background: linear-gradient(45deg, #ff4040, #ff0000);
+        }
+        
+        .input-section {
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
+        }
+        
+        #driverNum {
+            width: 180px;
+            height: 100px;
+            font-size: 54px;
+            text-align: center;
+            border: 4px solid #e10600;
+            background: #222;
+            color: white;
+            border-radius: 12px;
+            margin: 0 auto 25px;
+            display: block;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        #submitBtn {
+            width: 280px;
+            height: 80px;
+            font-size: 32px;
+            background: linear-gradient(45deg, #e10600, #b30500);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            margin: 15px auto;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        #submitBtn:hover {
+            background: linear-gradient(45deg, #ff2a00, #e10600);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(225, 6, 0, 0.7);
+        }
+        
+        .key-hint {
+            font-size: 18px;
+            color: #aaa;
+            margin-top: 10px;
+        }
+        
+        .last-input {
+            font-size: 28px;
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(225, 6, 0, 0.1);
+            border-radius: 12px;
+            border: 2px solid #e10600;
+            text-align: center;
+        }
+        
+        .driver-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+            padding: 0 15px 25px;
+        }
+        
+        .driver-card {
+            padding: 20px 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            border: 2px solid #444;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+        
+        .driver-card:hover {
+            background: linear-gradient(45deg, #333, #444);
+            transform: translateY(-8px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
+        }
+        
+        .driver-card.selected {
+            background: linear-gradient(45deg, #e10600, #b30500);
+            box-shadow: 0 0 25px rgba(225, 6, 0, 0.8);
+            border-color: #ffcc00;
+            transform: scale(1.08);
+        }
+        
+        .driver-card.assigned {
+            border: 2px solid #ffcc00;  
+        }
+        
+        .sync-status {
+            text-align: center;
+            font-size: 18px;
+            color: #888;
+            padding: 10px;
+            background: rgba(20, 20, 20, 0.8);
+            border-top: 1px solid #444;
+        }
+        
+        @media (max-width: 768px) {
+            .flag-banner {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .flag-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .driver-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .race-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>RACE CONTROL PANEL</h1>
+            
+            <div class="flag-banner">
+                <div class="flag-item" id="red_flag_banner">RED FLAG</div>
+                <div class="flag-item" id="yellow_flag_banner">YELLOW FLAG</div>
+                <div class="flag-item" id="safety_car_banner">SAFETY CAR</div>
+                <div class="flag-item" id="green_flag_banner">GREEN FLAG</div>
+                <div class="flag-item" id="safety_car_ending_banner">SAFETY CAR ENDING</div>
+            </div>
+            
+            <div class="race-info">
+                <div class="timer" id="raceTimer">00:00.000</div>
+                <div class="lap-counter">Lap <span id="current_lap">0</span>/<span id="total_laps">70</span></div>
+            </div>
+            
+            <div class="status" id="raceStatus">Race not started</div>
+        </div>
+        
+        <div class="operator-info">
+            <div>Operator: <span id="operator_id"> {{ operator_id }}</span></div>
+            <div>Drivers: <span id="assigned_drivers">1-4</span></div>
+        </div>
+        
+        <div class="control-section">
+            <div class="start-section">
+                <button id="startBtn">START RACE</button>
+                <button id="restartBtn" style="display:none;">RESTART AFTER RED</button>
+            </div>
+            
+            <div class="flag-controls">
+                <div class="flag-group">
+                    <button class="flag-btn" data-flag="safety_car">SAFETY CAR</button>
+                    <div class="flag-status" id="safety_car_status">OFF</div>
+                </div>
+                <div class="flag-group">
+                    <button class="flag-btn" data-flag="yellow_flag">YELLOW FLAG</button>
+                    <div class="flag-status" id="yellow_flag_status">OFF</div>
+                </div>
+                <div class="flag-group">
+                    <button class="flag-btn" data-flag="red_flag">RED FLAG</button>
+                    <div class="flag-status" id="red_flag_status">OFF</div>
+                </div>
+            </div>
+            
+            <div class="driver-grid" id="driverGrid">
+                <!-- Driver buttons will be inserted here -->
+            </div>
+        </div>
+        
+        <div class="sync-status" id="syncStatus">Synchronizing with server...</div>
+    </div>
+    <audio id="clickSound" src="{{ url_for('static', filename='spam_scream.mp3') }}"></audio>
+
+    <script>
+    // Global variables
+    let timerInterval = null;
+    let raceStarted = false;
+    let paused = false;
+    let pausedDuration = 0;
+    let operatorId = parseInt($('#operator_id').text())
+    let assignedDrivers = [];
+
+    // Set operator ID from URL
+    const pathParts = window.location.pathname.split('/');
+    if (pathParts.length > 2 && pathParts[2].startsWith('operator')) {
+        operatorId = parseInt(pathParts[2].replace('operator', ''));
+        if (isNaN(operatorId) || operatorId < 1 || operatorId > 5) operatorId = 1;
+    }
+    
+    // Generate driver buttons
+    $.getJSON('/race_data', function(data) {
+        console.log(data.drivers)
+        for (let i = 1; i <= data.drivers.length; i++) {
+            const card = $(`<div class="driver-card" style="background: ${data.drivers[i-1].color}" data-driver="${i}">#${data.drivers[i-1].team}</div>`);
+            $('#driverGrid').append(card);
+        }
+    })
+    
+    $(document).on('click', '.driver-card', function(){
+        console.log('a')
+        const driverNum = $(this).data('driver');
+        addLap(driverNum)
+    })
+
+    // Enter key support
+    $('#driverNum').keypress(function(e) {
+        if (e.which === 13) { // Enter key
+            $('#submitBtn').click();
+        }
+    });
+    
+    // Function to check race status from server
+    function checkRaceStatus() {
+        $.getJSON('/race_data', function(data) {
+            // Update race started flag
+            raceStarted = !!data.start_time
+            
+            // Update UI based on race status
+            if (raceStarted) {
+                $('#startBtn').prop('disabled', true);
+                $('#raceStatus').text("Race in progress").css('color', '#2c2');
+                
+                // Start timer if not already running
+                if (!timerInterval) {
+                    startRaceTimer();
+                }
+            } else {
+                $('#startBtn').prop('disabled', false);
+                $('#raceStatus').text("Race not started").css('color', '#aaa');
+            }
+            
+            // Show/hide restart button based on red flag status
+            if (data.red_flag_snapshot) {
+                $('#restartBtn').show();
+            } else {
+                $('#restartBtn').hide();
+            }
+            
+            // Update lap counter
+            if (data.current_lap) {
+                $('#current_lap').text(data.current_lap);
+                $('#total_laps').text(data.total_laps || 70);
+            }
+            
+            // Update flag indicators
+            updateFlagStatus(data.flags);
+            
+            // Update flag banners
+            updateFlagBanner(data.flags, data.flag_events);
+
+            checkPaused(data)
+            
+            // Update sync status
+            const lastUpdate = new Date(data.last_update * 1000);
+            const now = new Date();
+            const diff = (now - lastUpdate) / 1000;
+            
+            if (diff < 5) {
+                $('#syncStatus').text(`Synced ${Math.round(diff)}s ago`).css('color', '#2c2');
+            } else {
+                $('#syncStatus').text(`Synced ${Math.round(diff)}s ago - WARNING: Possible delay`).css('color', '#c22');
+            }
+        }).fail(function() {
+            $('#syncStatus').text("Failed to sync with server").css('color', '#c22');
+        });
+    }
+    
+    // Function to update flag banner
+    function updateFlagBanner(flags, flagEvents) {
+        // Reset all banners
+        $('#red_flag_banner, #yellow_flag_banner, #safety_car_banner, #green_flag_banner, #safety_car_ending_banner')
+            .removeClass('active blinking');
+        
+        // Show active flags with blinking effect
+        if (flags.red_flag) {
+            $('#red_flag_banner').addClass('active blinking');
+        }
+        if (flags.yellow_flag) {
+            $('#yellow_flag_banner').addClass('active blinking');
+        }
+        if (flags.safety_car) {
+            $('#safety_car_banner').addClass('active blinking');
+        }
+        
+        // Handle safety car ending
+        if (flagEvents.safety_car_end_time > 0) {
+            const timeLeft = flagEvents.safety_car_end_time - (Date.now() / 1000);
+            if (timeLeft > 0) {
+                $('#safety_car_ending_banner').text(`SAFETY CAR ENDING IN ${Math.ceil(timeLeft)}S`);
+                $('#safety_car_ending_banner').addClass('active blinking');
+            }
+        }
+        
+        // Handle green flag period
+        if (flagEvents.green_flag_end_time > 0) {
+            const timeLeft = flagEvents.green_flag_end_time - (Date.now() / 1000);
+            if (timeLeft > 0) {
+                $('#green_flag_banner').text(`GREEN FLAG FOR ${Math.ceil(timeLeft)}S`);
+                $('#green_flag_banner').addClass('active blinking');
+            }
+        }
+    }
+    
+    // Function to update flag status
+    function updateFlagStatus(flags) {
+        if (!flags) return;
+        
+        for (const flag in flags) {
+            const statusEl = $(`#${flag}_status`);
+            statusEl.text(flags[flag] ? 'ACTIVE' : 'OFF');
+            statusEl.toggleClass('active', flags[flag]);
+        }
+    }
+    
+    // Start race
+    $('#startBtn').click(function() {
+        $.post('/start_race', function(response) {
+            checkRaceStatus(); // Refresh status immediately
+            $('#raceStatus').text("Race started!").css('color', '#2c2');
+        }).fail(function(xhr) {
+            let errorMsg = xhr.responseJSON && xhr.responseJSON.error ? 
+                xhr.responseJSON.error : "Failed to start race!";
+            $('#raceStatus').text(errorMsg).css('color', '#c22');
+        });
+    });
+    
+    // Restart after red flag
+    $('#restartBtn').click(function() {
+        $.post('/restart_after_red', function(response) {
+            checkRaceStatus();
+            $('#raceStatus').text(response.status).css('color', '#2c2');
+        }).fail(function(xhr) {
+            let errorMsg = xhr.responseJSON && xhr.responseJSON.error ? 
+                xhr.responseJSON.error : "Failed to restart race!";
+            $('#raceStatus').text(errorMsg).css('color', '#c22');
+        });
+    });
+    
+    function addLap(driverNum) {        
+        if (!driverNum || driverNum < 1 || driverNum > 20) {
+            $('#raceStatus').text("Invalid driver number (1-20)").css('color', '#c22');
+            return;
+        }
+        
+        $.post('/driver_input', { driver_num: driverNum }, function(response) {
+            $('#lastInput').html(`Driver <b>#${driverNum}</b> - Lap ${response.current_lap} (<i>${response.lap_time}</i>)`);
+            $('#raceStatus').text(response.status).css('color', '#2c2');
+            
+            // Reset selection
+            $('.driver-card').removeClass('selected');
+            
+            // Update lap counter if needed
+            if (response.current_lap > parseInt($('#current_lap').text())) {
+                $('#current_lap').text(response.current_lap);
+            }
+        }).fail(function(xhr) {
+            let errorMsg = xhr.responseJSON && xhr.responseJSON.error ? 
+                xhr.responseJSON.error : "Error!";
+            $('#raceStatus').text(errorMsg).css('color', '#c22');
+            if(errorMsg == "JANGNAN DISPAM KONT!!!!") {
+                document.getElementById("clickSound").play();
+            }
+        });
+    }
+
+    // Submit lap
+    $('#submitBtn').click(function() {
+        const driverNum = $('#driverNum').val();    
+        addLap(driverNum)
+        $('#driverNum').val('').focus();
+    });
+    
+    // Race timer
+    function startRaceTimer() {
+        // Get start time from server
+        timerInterval = setInterval(() => {
+             $.getJSON('/race_data', function(data) {
+                if (!data.start_time) return;
+                paused = data.paused.is_paused;
+                const startTime = (data.start_time) * 1000; // Convert to milliseconds
+                
+                if(!paused) {
+                    const elapsed = data.elapsed_time - pausedDuration;
+                    const mins = Math.floor(elapsed / 60);
+                    const secs = (elapsed % 60).toFixed(3);
+                    $('#raceTimer').text(`${mins}:${secs.padStart(6, '0')}`);
+                }
+            });
+        }, 1000);
+
+       
+    }
+    
+    // Handle flag buttons
+    $('.flag-btn').click(function() {
+        const flag = $(this).data('flag');
+        const currentStatus = $(`#${flag}_status`).text() === 'ACTIVE';
+        const newStatus = !currentStatus;
+
+        $.post('/set_flag', {
+            flag: flag,
+            value: newStatus
+        }, function(response) {
+            // Update flags from response
+            updateFlagStatus(response.flags);
+
+            // Update banners with events
+            $.getJSON('/race_data', function(data) {
+                updateFlagBanner(data.flags, data.flag_events);
+            });
+            
+            $('#raceStatus').text(response.status).css('color', '#2c2');
+        }).fail(function(xhr) {
+            let errorMsg = xhr.responseJSON && xhr.responseJSON.error ? 
+                xhr.responseJSON.error : "Failed to set flag";
+            $('#raceStatus').text(errorMsg).css('color', '#c22');
+        });
+    });
+    
+    function checkPaused(race_data) {
+        paused = race_data.paused.is_paused;
+        pausedDuration = race_data.paused.duration
+    }
+
+    // Initialize
+    $(document).ready(function() {
+        // Check initial race status
+        checkRaceStatus();
+        
+        // Set up periodic status checks
+        setInterval(checkRaceStatus, 2000); // Check every 2 seconds
+
+        // Focus on input field
+        $('#driverNum').focus();
+    });
+    </script>
+</body>
+</html>
