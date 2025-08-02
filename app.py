@@ -42,41 +42,42 @@ driver_names  = {
         'color': 'red'
     },
     4: {
-        "name": 'Sezoku Kurosaki',
-        'logo': 'zero.png',
-        'team': 7,
-        'color': 'cyan'
-    },
-    5: {
-        "name": 'Tatsuji Kinomiya',
-        'logo': 'harmony.png',
-        'team': 69,
-        'color': 'purple'
-    },
-    6: {
-        "name": 'Sonia Lovely',
-        'logo': 'corsa.png',
-        'team': 29,
-        'color': 'yellow'
-    },
-    7: {
-        "name": 'Viktoriya Anastasia',
-        'logo': 'agro.png',
-        'team': 16,
-        'color': 'green'
-    },
-    8: {
-        "name": 'Frank Cooper',
-        'logo': 'autojuice.png',
-        'team': 75,
-        'color': 'black'
-    },
-    9: {
         "name": 'Jouji Nakahara',
         'logo': 'harmony.png',
         'team': 96,
         'color': 'purple'
     },
+    5: {
+        "name": 'Sezoku Kurosaki',
+        'logo': 'zero.png',
+        'team': 7,
+        'color': 'cyan'
+    },
+    6: {
+        "name": 'Tatsuji Kinomiya',
+        'logo': 'harmony.png',
+        'team': 69,
+        'color': 'purple'
+    },
+    7: {
+        "name": 'Sonia Lovely',
+        'logo': 'corsa.png',
+        'team': 29,
+        'color': 'yellow'
+    },
+    8: {
+        "name": 'Viktoriya Anastasia',
+        'logo': 'agro.png',
+        'team': 16,
+        'color': 'green'
+    },
+    9: {
+        "name": 'Frank Cooper',
+        'logo': 'autojuice.png',
+        'team': 75,
+        'color': 'black'
+    },
+
 }
 
 # Struktur data untuk menyimpan status balapan
