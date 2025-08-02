@@ -24,40 +24,58 @@ users = {
 
 driver_names  = {
     1: {
-        "name": 'Lewis Hamilton',
-        'logo': 'driver_1.png',
-        'team': 11,
-        'color': 'red'
+        "name": 'Giselle Hennessey',
+        'logo': 'corsa.png',
+        'team': 47,
+        'color': 'yellow'
     },
     2: {
-        "name": 'Max Verstappen',
-        'logo': 'driver_2.png',
-        'team': 32,
-        'color': 'blue'
+        "name": 'Cassandra Marcelli',
+        'logo': 'sonnard.png',
+        'team': 77,
+        'color': 'red'
     },
     3: {
-        "name": 'Charles Leclerc',
-        'logo': 'driver_3.png',
-        'team': 69,
+        "name": 'Aaron Cranston',
+        'logo': 'sonnard.png',
+        'team': 33,
         'color': 'red'
     },
     4: {
-        "name": 'Sergio Perez',
-        'logo': 'driver_4.png',
-        'team': 96,
-        'color': 'yellow'
+        "name": 'Sezoku Kurosaki',
+        'logo': 'zero.png',
+        'team': 7,
+        'color': 'cyan'
     },
     5: {
-        "name": 'George Russell',
-        'logo': 'driver_5.png',
-        'team': 55,
-        'color': 'orange'
+        "name": 'Tatsuji Kinomiya',
+        'logo': 'harmony.png',
+        'team': 69,
+        'color': 'purple'
     },
     6: {
-        "name": 'George Russell',
-        'logo': 'driver_5.png',
-        'team': 55,
-        'color': 'orange'
+        "name": 'Sonia Lovely',
+        'logo': 'corsa.png',
+        'team': 29,
+        'color': 'yellow'
+    },
+    7: {
+        "name": 'Viktoriya Anastasia',
+        'logo': 'agro.png',
+        'team': 16,
+        'color': 'green'
+    },
+    8: {
+        "name": 'Frank Cooper',
+        'logo': 'autojuice.png',
+        'team': 75,
+        'color': 'black'
+    },
+    9: {
+        "name": 'Jouji Nakahara',
+        'logo': 'harmony.png',
+        'team': 96,
+        'color': 'purple'
     },
 }
 

@@ -2,10 +2,10 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #0a0a0a;
+    background-color: #0d0d0d; /* almost-black */
     font-family: 'Roboto Condensed', sans-serif;
-    color: white;
-    width: 350px;
+    color: #e6e6e6; /* light grey */
+    width: 380px;
     height: 900px;
     overflow: hidden;
     position: relative;
@@ -14,9 +14,9 @@ body {
 /* Header */
 .header {
     display: flex;
-    background: linear-gradient(to right, #000000, #b30500);
+    background: linear-gradient(to right, #8e2de2, #4a00e0); /* purple gradient */
     padding: 8px 12px;
-    border-bottom: 2px solid #ffcc00;
+    border-bottom: 2px solid #ff005c; /* hot pink accent */
     position: relative;
     z-index: 2;
     min-height: 120px;
@@ -36,7 +36,6 @@ body {
 
 .director-img {
     width: 100%;
-    /* height: 70px; */
     object-fit: cover;
 }
 
@@ -50,10 +49,10 @@ body {
     margin: 0;
     font-size: 16px;
     letter-spacing: 1px;
-    color: #ffffff;
+    color: #e6e6e6;
     text-transform: uppercase;
     font-weight: 700;
-    text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.7);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     text-align: center;
 }
 
@@ -69,9 +68,9 @@ body {
     font-weight: bold;
     font-size: 18px;
     font-family: 'Orbitron', sans-serif;
-    color: #ffffff;
+    color: #00ff9f; /* neon green */
     min-width: 90px;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(30, 30, 30, 0.6);
     padding: 3px 8px;
     border-radius: 5px;
     text-align: center;
@@ -80,9 +79,10 @@ body {
 .lap-counter {
     font-size: 16px;
     font-weight: bold;
-    background: rgba(0,0,0,0.5);
+    background: rgba(30, 30, 30, 0.6);
     padding: 3px 10px;
     border-radius: 10px;
+    color: #e6e6e6;
 }
 
 /* Flag Banner */
@@ -102,7 +102,7 @@ body {
     border-radius: 5px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
     text-align: center;
     flex-grow: 1;
 }
@@ -122,46 +122,46 @@ body {
 }
 
 #red_flag_banner {
-    background: linear-gradient(45deg, #ff0000, #cc0000);
-    color: white;
+    background: linear-gradient(45deg, #ff005c, #d70040); /* hot pink to deep red */
+    color: #f0f0f0;
 }
 
 #yellow_flag_banner {
-    background: linear-gradient(45deg, #ffff00, #cccc00);
-    color: black;
+    background: linear-gradient(45deg, #ffd600, #ff9e00); /* bright yellow to orange */
+    color: #0d0d0d;
 }
 
 #safety_car_banner {
-    background: linear-gradient(45deg, #ffcc00, #cc9900);
-    color: black;
+    background: linear-gradient(45deg, #00ff9f, #00b383); /* neon green gradient */
+    color: #0d0d0d;
 }
 
 #green_flag_banner {
-    background: linear-gradient(45deg, #00aa00, #008800);
-    color: white;
+    background: linear-gradient(45deg, #00cfff, #008fb3); /* cyan gradient */
+    color: #0d0d0d;
 }
 
 #safety_car_ending_banner {
-    background: linear-gradient(45deg, #ff9900, #cc6600);
-    color: white;
+    background: linear-gradient(45deg, #ff9e00, #ff005c); /* orange to hot pink */
+    color: #f0f0f0;
 }
 
 /* Tabel Leaderboard */
 #leaderboard {
     width: 100%;
     border-collapse: collapse;
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(20, 20, 20, 0.9);
     font-size: 12px;
     position: relative;
     z-index: 1;
 }
 
 #leaderboard th {
-    background: linear-gradient(to bottom, #2a2a2a 0%, #1a1a1a 100%);
-    color: #ffcc00;
+    background: linear-gradient(to bottom, #3a0ca3 0%, #7209b7 100%);
+    color: #caf0f8; /* pale cyan */
     text-align: left;
     padding: 8px 5px;
-    border-bottom: 2px solid #e10600;
+    border-bottom: 2px solid #ff005c;
     text-transform: uppercase;
     font-weight: 700;
     letter-spacing: 0.5px;
@@ -170,24 +170,24 @@ body {
 #leaderboard td {
     padding: 8px 5px;
     border-bottom: 1px solid #333;
-    color: #fff;
+    color: #e6e6e6;
     height: 30px;
     vertical-align: middle;
 }
 
 /* Baris Highlight untuk posisi 1-3 */
 #leaderboard tr:nth-child(1) td {
-    background: linear-gradient(to right, rgba(225, 6, 0, 0.3), rgba(30, 30, 30, 0.7));
+    background: linear-gradient(to right, rgba(255, 0, 92, 0.3), rgba(13, 13, 13, 0.7));
     font-weight: bold;
-    color: #fff;
+    color: #e6e6e6;
 }
 
 #leaderboard tr:nth-child(2) td {
-    background: linear-gradient(to right, rgba(255, 255, 255, 0.3), rgba(30, 30, 30, 0.7));
+    background: linear-gradient(to right, rgba(142, 45, 226, 0.3), rgba(13, 13, 13, 0.7));
 }
 
 #leaderboard tr:nth-child(3) td {
-    background: linear-gradient(to right, rgba(150, 90, 0, 0.3), rgba(30, 30, 30, 0.7));
+    background: linear-gradient(to right, rgba(0, 255, 159, 0.3), rgba(13, 13, 13, 0.7));
 }
 
 /* Kolom driver */
@@ -205,7 +205,7 @@ body {
     margin-right: 8px;
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid #e10600;
+    border: 1px solid #ff005c;
     padding: 1px;
     flex-shrink: 0;
 }
@@ -228,67 +228,62 @@ body {
     top: 0;
     bottom: 0;
     width: 2px;
-    background-color: #e10600;
+    background-color: #ff005c;
 }
 
-/* Warna garis tim berbeda untuk beberapa pembalap */
-#leaderboard tr:nth-child(1) td:nth-child(3)::before { background-color: #e10600; }
-#leaderboard tr:nth-child(2) td:nth-child(3)::before { background-color: #ffffff; }
-#leaderboard tr:nth-child(3) td:nth-child(3)::before { background-color: #ffd700; }
+#leaderboard tr:nth-child(1) td:nth-child(3)::before { background-color: #caf0f8; }
+#leaderboard tr:nth-child(2) td:nth-child(3)::before { background-color: #8e2de2; }
+#leaderboard tr:nth-child(3) td:nth-child(3)::before { background-color: #00ff9f; }
 
 /* Responsive untuk logo di podium */
 #leaderboard tr:nth-child(1) .driver-logo {
     transform: scale(1.1);
-    border: 2px solid #fff;
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    border: 2px solid #e6e6e6;
+    box-shadow: 0 0 5px rgba(230, 0, 92, 0.7);
 }
 
 #leaderboard tr:nth-child(2) .driver-logo {
     transform: scale(1.1);
-    border: 2px solid #c0c0c0;
+    border: 2px solid #8e2de2;
 }
 
 #leaderboard tr:nth-child(3) .driver-logo {
     transform: scale(1.1);
-    border: 2px solid #cd7f32;
+    border: 2px solid #00ff9f;
 }
 
 /* Perbaikan lebar kolom */
 #leaderboard th:nth-child(1),
 #leaderboard td:nth-child(1) { 
-    width: 10%; /* POS */
+    width: 10%;
     text-align: center;
     padding-left: 3px;
     padding-right: 3px;
 }
-
 #leaderboard th:nth-child(2),
 #leaderboard td:nth-child(2) { 
-    width: 10%; /* NO */
+    width: 10%;
     text-align: center;
     padding-left: 3px;
     padding-right: 3px;
 }
-
 #leaderboard th:nth-child(3),
 #leaderboard td:nth-child(3) { 
-    width: 45%; /* DRIVER */
+    width: 45%;
     text-align: left;
     padding-left: 5px;
     padding-right: 5px;
 }
-
 #leaderboard th:nth-child(4),
 #leaderboard td:nth-child(4) { 
-    width: 10%; /* LAPS */
+    width: 10%;
     text-align: center;
     padding-left: 3px;
     padding-right: 3px;
 }
-
 #leaderboard th:nth-child(5),
 #leaderboard td:nth-child(5) { 
-    width: 25%; /* LAST LAP */
+    width: 25%;
     text-align: center;
     padding-left: 3px;
     padding-right: 3px;
@@ -299,7 +294,7 @@ body {
 
 /* Efek garis pembatas antar baris */
 #leaderboard tr:not(:last-child) {
-    box-shadow: inset 0 -1px 0 rgba(80, 80, 80, 0.2);
+    box-shadow: inset 0 -1px 0 rgba(60, 60, 60, 0.2);
 }
 
 /* Background pattern F1 tipis */
@@ -313,13 +308,13 @@ body::after {
     background: 
         linear-gradient(90deg, 
             transparent 95%, 
-            rgba(225, 6, 0, 0.03) 95%,
-            rgba(225, 6, 0, 0.03) 96%,
+            rgba(202, 240, 248, 0.03) 95%,
+            rgba(202, 240, 248, 0.03) 96%,
             transparent 96%),
         linear-gradient(0deg, 
             transparent 95%, 
-            rgba(225, 6, 0, 0.03) 95%,
-            rgba(225, 6, 0, 0.03) 96%,
+            rgba(202, 240, 248, 0.03) 95%,
+            rgba(202, 240, 248, 0.03) 96%,
             transparent 96%);
     background-size: 30px 30px;
     pointer-events: none;
@@ -328,27 +323,27 @@ body::after {
 
 /* Animasi khusus */
 @keyframes red-alert {
-    0% { box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); }
-    50% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.8); }
-    100% { box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); }
+    0% { box-shadow: 0 0 5px rgba(255, 0, 92, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(255, 0, 92, 0.8); }
+    100% { box-shadow: 0 0 5px rgba(255, 0, 92, 0.5); }
 }
 
 @keyframes yellow-alert {
-    0% { box-shadow: 0 0 5px rgba(255, 255, 0, 0.5); }
-    50% { box-shadow: 0 0 20px rgba(255, 255, 0, 0.8); }
-    100% { box-shadow: 0 0 5px rgba(255, 255, 0, 0.5); }
+    0% { box-shadow: 0 0 5px rgba(255, 214, 0, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(255, 214, 0, 0.8); }
+    100% { box-shadow: 0 0 5px rgba(255, 214, 0, 0.5); }
 }
 
 @keyframes safety-car-alert {
-    0% { box-shadow: 0 0 5px rgba(255, 204, 0, 0.5); }
-    50% { box-shadow: 0 0 20px rgba(255, 204, 0, 0.8); }
-    100% { box-shadow: 0 0 5px rgba(255, 204, 0, 0.5); }
+    0% { box-shadow: 0 0 5px rgba(0, 255, 159, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(0, 255, 159, 0.8); }
+    100% { box-shadow: 0 0 5px rgba(0, 255, 159, 0.5); }
 }
 
 @keyframes green-alert {
-    0% { box-shadow: 0 0 5px rgba(0, 255, 0, 0.5); }
-    50% { box-shadow: 0 0 20px rgba(0, 255, 0, 0.8); }
-    100% { box-shadow: 0 0 5px rgba(0, 255, 0, 0.5); }
+    0% { box-shadow: 0 0 5px rgba(0, 207, 255, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(0, 207, 255, 0.8); }
+    100% { box-shadow: 0 0 5px rgba(0, 207, 255, 0.5); }
 }
 
 .red-flag-active {
