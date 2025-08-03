@@ -78,7 +78,7 @@ driver_names  = {
         'color': 'black'
     },
     10: {
-        "name": 'John Doe',
+        "name": 'Ayumi Nakai',
         'logo': 'autojuice.png',
         'team': 65,
         'color': 'orange'
