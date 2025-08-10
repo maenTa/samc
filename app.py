@@ -23,19 +23,25 @@ users = {
 }
 
 driver_names  = {
+    1: {
+        "name": 'Sonia Lovely',
+        'logo': 'corsa.png',
+        'team': 29,
+        'color': 'yellow'
+    },
     2: {
         "name": 'Giselle Hennessey',
         'logo': 'corsa.png',
         'team': 47,
         'color': 'yellow'
     },
-    6: {
-        "name": 'Cassandra Marcelli',
-        'logo': 'sonnard.png',
-        'team': 77,
-        'color': 'red'
+    3: {
+        "name": 'Tatsuji Kinomiya',
+        'logo': 'harmony.png',
+        'team': 69,
+        'color': 'purple'
     },
-    4: {
+     4: {
         "name": 'Aaron Cranston',
         'logo': 'sonnard.png',
         'team': 33,
@@ -47,23 +53,23 @@ driver_names  = {
         'team': 96,
         'color': 'purple'
     },
+    6: {
+        "name": 'Cassandra Marcelli',
+        'logo': 'sonnard.png',
+        'team': 77,
+        'color': 'red'
+    },
     7: {
         "name": 'Sezoku Kurosaki',
         'logo': 'zero.png',
         'team': 7,
         'color': 'cyan'
-    },
-    3: {
-        "name": 'Tatsuji Kinomiya',
-        'logo': 'harmony.png',
-        'team': 69,
-        'color': 'purple'
-    },
-    1: {
-        "name": 'Sonia Lovely',
-        'logo': 'corsa.png',
-        'team': 29,
-        'color': 'yellow'
+    },    
+    8: {
+        "name": 'Paul White',
+        'logo': 'agro.png',
+        'team': 31,
+        'color': 'green'
     },
     9: {
         "name": 'Viktoriya Anastasia',
@@ -71,23 +77,17 @@ driver_names  = {
         'team': 16,
         'color': 'green'
     },
-    8: {
-        "name": 'Paul White',
-        'logo': 'agro.png',
-        'team': 31,
-        'color': 'green'
-    },
     10: {
-        "name": 'Ayumi Nakai',
+        "name": 'Yamagata Haruko',
         'logo': 'autojuice.png',
         'team': 65,
         'color': 'orange'
     },
     11: {
-        "name": 'Ayumi Nakai',
+        "name": 'Vaughn Genovese',
         'logo': 'autojuice.png',
-        'team': 65,
-        'color': 'orange'
+        'team': 75,
+        'color': 'black'
     },
 }
 
