@@ -105,7 +105,7 @@ race_data = {
         "safety_car_end_time": 0,
         "green_flag_end_time": 0
     },
-    "total_laps": 35,
+    "total_laps": 68,
     "current_lap": 0,
     "red_flag_snapshot": None,
     "safety_car_active": False,
