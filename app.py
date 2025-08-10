@@ -23,59 +23,59 @@ users = {
 }
 
 driver_names  = {
-    1: {
+    2: {
         "name": 'Giselle Hennessey',
         'logo': 'corsa.png',
         'team': 47,
         'color': 'yellow'
     },
-    2: {
+    6: {
         "name": 'Cassandra Marcelli',
         'logo': 'sonnard.png',
         'team': 77,
         'color': 'red'
     },
-    3: {
+    4: {
         "name": 'Aaron Cranston',
         'logo': 'sonnard.png',
         'team': 33,
         'color': 'red'
     },
-    4: {
+    5: {
         "name": 'Jouji Nakahara',
         'logo': 'harmony.png',
         'team': 96,
         'color': 'purple'
     },
-    5: {
+    7: {
         "name": 'Sezoku Kurosaki',
         'logo': 'zero.png',
         'team': 7,
         'color': 'cyan'
     },
-    6: {
+    3: {
         "name": 'Tatsuji Kinomiya',
         'logo': 'harmony.png',
         'team': 69,
         'color': 'purple'
     },
-    7: {
+    1: {
         "name": 'Sonia Lovely',
         'logo': 'corsa.png',
         'team': 29,
         'color': 'yellow'
     },
-    8: {
+    9: {
         "name": 'Viktoriya Anastasia',
         'logo': 'agro.png',
         'team': 16,
         'color': 'green'
     },
-    9: {
-        "name": 'Frank Cooper',
-        'logo': 'autojuice.png',
-        'team': 75,
-        'color': 'black'
+    8: {
+        "name": 'Paul White',
+        'logo': 'agro.png',
+        'team': 31,
+        'color': 'green'
     },
     10: {
         "name": 'Ayumi Nakai',
@@ -83,7 +83,12 @@ driver_names  = {
         'team': 65,
         'color': 'orange'
     },
-
+    11: {
+        "name": 'Ayumi Nakai',
+        'logo': 'autojuice.png',
+        'team': 65,
+        'color': 'orange'
+    },
 }
 
 # Struktur data untuk menyimpan status balapan
